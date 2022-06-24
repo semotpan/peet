@@ -1,13 +1,16 @@
-package com.semo.peet.service.common;
+package com.semo.peet.service.income.domain;
 
-public enum PaymentType {
+import com.semo.peet.service.common.Guards;
 
-    CASH("Cash"),
-    BANK("Bank");
+public enum IncomeSource {
+
+    SALARY("Salary"),
+    LOAN("Loan"),
+    BUSINESS("Business");
 
     private final String value;
 
-    PaymentType(String value) {
+    IncomeSource(String value) {
         Guards.notNull(value, "Value cannot be null.");
         Guards.notBlank(value, "Value cannot be blank.");
 

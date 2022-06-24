@@ -1,4 +1,4 @@
-package com.semo.peet.service.expense.domain;
+package com.semo.peet.service.income.domain;
 
 import nl.jqno.equalsverifier.EqualsVerifier;
 import org.junit.jupiter.api.Tag;
@@ -10,26 +10,26 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatNullPointerException;
 
 @Tag("unit")
-class ExpenseTimeTest {
+class IncomeTimeTest {
 
     @Test
     void creation() {
 
         var time = LocalTime.now();
 
-        assertThat(ExpenseTime.valueOf(time))
+        assertThat(IncomeTime.valueOf(time))
                 .isNotNull()
-                .extracting(ExpenseTime::value)
+                .extracting(IncomeTime::value)
                 .isEqualTo(time);
 
-        assertThat(ExpenseTime.now())
+        assertThat(IncomeTime.now())
                 .isNotNull()
-                .extracting(ExpenseTime::value)
+                .extracting(IncomeTime::value)
                 .isNotNull();
 
-        assertThat(new ExpenseTime(time))
+        assertThat(new IncomeTime(time))
                 .isNotNull()
-                .extracting(ExpenseTime::value)
+                .extracting(IncomeTime::value)
                 .isEqualTo(time);
     }
 
@@ -37,18 +37,18 @@ class ExpenseTimeTest {
     void creationFailsWhenValueIsNull() {
 
         assertThatNullPointerException()
-                .isThrownBy(() -> ExpenseTime.valueOf(null))
+                .isThrownBy(() -> IncomeTime.valueOf(null))
                 .withMessage("Value cannot be null.");
 
         assertThatNullPointerException()
-                .isThrownBy(() -> new ExpenseTime(null))
+                .isThrownBy(() -> new IncomeTime(null))
                 .withMessage("Value cannot be null.");
     }
 
     @Test
     public void equalsContract() {
 
-        EqualsVerifier.forClass(ExpenseTime.class)
+        EqualsVerifier.forClass(IncomeTime.class)
                 .withNonnullFields("value")
                 .verify();
     }

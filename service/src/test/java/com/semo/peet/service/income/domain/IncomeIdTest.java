@@ -1,54 +1,53 @@
-package com.semo.peet.service.expense.domain;
+package com.semo.peet.service.income.domain;
 
 import nl.jqno.equalsverifier.EqualsVerifier;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
-import java.time.LocalTime;
+import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatNullPointerException;
 
 @Tag("unit")
-class ExpenseTimeTest {
+class IncomeIdTest {
 
     @Test
     void creation() {
 
-        var time = LocalTime.now();
+        var uuid = UUID.randomUUID();
 
-        assertThat(ExpenseTime.valueOf(time))
+        assertThat(IncomeId.valueOf(uuid))
                 .isNotNull()
-                .extracting(ExpenseTime::value)
-                .isEqualTo(time);
+                .extracting(IncomeId::value)
+                .isEqualTo(uuid);
 
-        assertThat(ExpenseTime.now())
+        assertThat(IncomeId.newIncomeId())
                 .isNotNull()
-                .extracting(ExpenseTime::value)
+                .extracting(IncomeId::value)
                 .isNotNull();
 
-        assertThat(new ExpenseTime(time))
+
+        assertThat(new IncomeId(uuid))
                 .isNotNull()
-                .extracting(ExpenseTime::value)
-                .isEqualTo(time);
+                .extracting(IncomeId::value)
+                .isEqualTo(uuid);
     }
 
     @Test
     void creationFailsWhenValueIsNull() {
-
         assertThatNullPointerException()
-                .isThrownBy(() -> ExpenseTime.valueOf(null))
+                .isThrownBy(() -> IncomeId.valueOf(null))
                 .withMessage("Value cannot be null.");
 
         assertThatNullPointerException()
-                .isThrownBy(() -> new ExpenseTime(null))
+                .isThrownBy(() -> new IncomeId(null))
                 .withMessage("Value cannot be null.");
     }
 
     @Test
     public void equalsContract() {
-
-        EqualsVerifier.forClass(ExpenseTime.class)
+        EqualsVerifier.forClass(IncomeId.class)
                 .withNonnullFields("value")
                 .verify();
     }

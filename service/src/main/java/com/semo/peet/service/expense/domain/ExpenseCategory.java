@@ -21,6 +21,8 @@ public enum ExpenseCategory {
 
     ExpenseCategory(String value) {
         Guards.notNull(value, "Value cannot be null.");
+        Guards.notBlank(value, "Value cannot be blank.");
+
         this.value = value;
     }
 

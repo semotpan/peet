@@ -1,54 +1,52 @@
-package com.semo.peet.service.expense.domain;
+package com.semo.peet.service.income.domain;
 
 import nl.jqno.equalsverifier.EqualsVerifier;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
-import java.time.LocalTime;
+import java.time.LocalDate;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatNullPointerException;
 
 @Tag("unit")
-class ExpenseTimeTest {
+class IncomeDateTest {
 
     @Test
     void creation() {
 
-        var time = LocalTime.now();
+        var date = LocalDate.now();
 
-        assertThat(ExpenseTime.valueOf(time))
+        assertThat(IncomeDate.valueOf(date))
                 .isNotNull()
-                .extracting(ExpenseTime::value)
-                .isEqualTo(time);
+                .extracting(IncomeDate::value)
+                .isEqualTo(date);
 
-        assertThat(ExpenseTime.now())
+        assertThat(IncomeDate.now())
                 .isNotNull()
-                .extracting(ExpenseTime::value)
+                .extracting(IncomeDate::value)
                 .isNotNull();
 
-        assertThat(new ExpenseTime(time))
+        assertThat(new IncomeDate(date))
                 .isNotNull()
-                .extracting(ExpenseTime::value)
-                .isEqualTo(time);
+                .extracting(IncomeDate::value)
+                .isEqualTo(date);
     }
 
     @Test
     void creationFailsWhenValueIsNull() {
-
         assertThatNullPointerException()
-                .isThrownBy(() -> ExpenseTime.valueOf(null))
+                .isThrownBy(() -> IncomeDate.valueOf(null))
                 .withMessage("Value cannot be null.");
 
         assertThatNullPointerException()
-                .isThrownBy(() -> new ExpenseTime(null))
+                .isThrownBy(() -> new IncomeDate(null))
                 .withMessage("Value cannot be null.");
     }
 
     @Test
     public void equalsContract() {
-
-        EqualsVerifier.forClass(ExpenseTime.class)
+        EqualsVerifier.forClass(IncomeDate.class)
                 .withNonnullFields("value")
                 .verify();
     }
